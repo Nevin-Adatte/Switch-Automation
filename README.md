@@ -14,7 +14,7 @@ List the technologies used in your project, such as:
 
 - Blynk API
 - Arduino IDE
-- Microcontroller board (e.g. Arduino Uno, ESP8266)
+- ESP32 Dev Module (Microcontroller board )
 - Relay module
 - NFC module
 - Smartphone (Android or iOS)
