@@ -29,7 +29,7 @@ This endpoint allows you to update the value of the Datastream value via GET req
 ### API link to update data
 
 ```
-https://blynk.cloud/external/api/update?token=7N5w7p9EKaRyohKFI-99TTzPZ40kxUdR&v0=1
+https://blynk.cloud/external/api/update?token=7tgFPmN33WqxR2SE_j9i8qgOh6pKQpru&v0=1
 ```
 </details>
 <details id=2>
@@ -45,6 +45,6 @@ This endpoint allows you to get the stored value of the Datastream by pin type a
 ### API link to get data
 
 ```
-https://blynk.cloud/external/api/get?token=7N5w7p9EKaRyohKFI-99TTzPZ40kxUdR&v0
+https://blynk.cloud/external/api/get?token=7tgFPmN33WqxR2SE_j9i8qgOh6pKQpru&v0
 ```
 </details>
