@@ -6,7 +6,7 @@
   	-moz-osx-font-smoothing: grayscale;
 }
 body , #auth{
-  	background-color: #435165;
+  	background-color: #ddda4c;
   	margin: 0;
 }
 .login, .register {
