@@ -16,23 +16,13 @@
                 <label class="switch-label">LIGHT 1</label>
                 <div class="switch-container">
                     <label class="switch">
-                        <input type="checkbox" id="v0" onclick="updateData(this, 'v0')">
-                        <!-- onclick="getData(this, 'v0')" -->
-                        <span class="slider"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="light-container">
-                <label class="switch-label">LIGHT 2</label>
-                <div class="switch-container">
-                    <label class="switch">
                         <input type="checkbox" id="v1" onclick="updateData(this, 'v1')">
                         <span class="slider"></span>
                     </label>
                 </div>
             </div>
             <div class="light-container">
-                <label class="switch-label">LIGHT 3</label>
+                <label class="switch-label">Light 2</label>
                 <div class="switch-container">
                     <label class="switch">
                         <input type="checkbox" id="v2" onclick="updateData(this, 'v2')">
@@ -43,7 +33,7 @@
         <!--</div>
         <div class="switch-row"> -->
             <div class="light-container">
-                <label class="switch-label">LIGHT 4</label>
+                <label class="switch-label">Fan 1</label>
                 <div class="switch-container">
                     <label class="switch">
                         <input type="checkbox" id="v3" onclick="updateData(this, 'v3')">
@@ -52,7 +42,7 @@
                 </div>
             </div>
             <div class="light-container">
-                <label class="switch-label">FAN 1</label>
+                <label class="switch-label">FAN 2</label>
                 <div class="switch-container">
                     <label class="switch">
                         <input type="checkbox" id="v4" onclick="updateData(this, 'v4')">
@@ -61,7 +51,7 @@
                 </div>
             </div>
             <div class="light-container">
-                <label class="switch-label">FAN 2</label>
+                <label class="switch-label">Lock</label>
                 <div class="switch-container">
                     <label class="switch">
                         <input type="checkbox" id="v5" onclick="updateData(this, 'v5')">
@@ -69,38 +59,19 @@
                     </label>
                 </div>
             </div>
-        <!-- </div>
-        <div class="switch-row"> -->
-            <div class="light-container">
-                <label class="switch-label">FAN 3</label>
-                <div class="switch-container">
-                    <label class="switch">
-                        <input type="checkbox" id="v6" onclick="updateData(this, 'v6')">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="light-container">
-                <label class="switch-label">FAN 4</label>
-                <div class="switch-container">
-                    <label class="switch">
-                        <input type="checkbox" id="v7" onclick="updateData(this, 'v7')">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="light-container">
-                <label class="switch-label">DOOR lOCK</label>
-                <div class="switch-container">
-                    <label class="switch">
-                        <input type="checkbox" id="v8" onclick="updateData(this, 'v8')">
-                        <span class="slider"></span>
-                    </label>
-                </div>
             </div>
         </div>
     </div>
-
+    <div class="gauge temperature">
+        <div class="needle temperature"></div>
+        <div class="dial"></div>
+        <div class="label temperature">-- °C</div>
+    </div>
+    <div class="gauge humidity">
+        <div class="needle humidity"></div>
+        <div class="dial"></div>
+        <div class="label humidity">-- %</div>
+    </div>
     <script src="index.js"></script>
 </body>
 </html>

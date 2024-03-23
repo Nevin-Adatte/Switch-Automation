@@ -7,7 +7,7 @@ console.log("inside the js")
 
 
 function loadPage() {
-    for(let i= 0; i<= 8; i++) {
+    for(let i= 1; i<= 10; i++) {
         fetchData(i);
     }
 }
@@ -73,3 +73,54 @@ function fetchData(value) {
   }
 // Add more time in seconds
 setInterval(loadPage, 1000);
+  // Function to update temperature gauge
+  function updateTemperatureGauge(temperatureValue) {
+    const gauge = document.querySelector('.gauge.temperature');
+    const needle = gauge.querySelector('.needle.temperature');
+    const label = gauge.querySelector('.label.temperature');
+    
+    const angle = (temperatureValue / 100) * 180 - 90; // Assuming temperature range is 0-100
+    needle.style.transform = `translateX(-50%) rotate(${angle}deg)`;
+    label.textContent = `${temperatureValue.toFixed(2)} °C`; // Display temperature with 2 decimal places
+  }
+  
+  // Function to update humidity gauge
+  function updateHumidityGauge(humidityValue) {
+    const gauge = document.querySelector('.gauge.humidity');
+    const needle = gauge.querySelector('.needle.humidity');
+    const label = gauge.querySelector('.label.humidity');
+    
+    const angle = (humidityValue / 100) * 180 - 90; // Assuming humidity range is 0-100
+    needle.style.transform = `translateX(-50%) rotate(${angle}deg)`;
+    label.textContent = `${humidityValue.toFixed(2)} %`; // Display humidity with 2 decimal places
+  }
+  
+  // Function to fetch data from API and update gauges
+  function fetchDataAndUpdateGauges() {
+    // Replace 'apiUrlTemperature' and 'apiUrlHumidity' with the actual API endpoints
+    const apiUrlTemperature = 'your_temperature_api_endpoint';
+    const apiUrlHumidity = 'your_humidity_api_endpoint';
+  
+    // Fetch temperature data
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const temperatureValue = data.temperature; // Assuming API response has a 'temperature' field
+            updateTemperatureGauge(temperatureValue);
+        })
+        .catch(error => console.error('Error fetching temperature data:', error));
+  
+    // Fetch humidity data
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const humidityValue = data.humidity; // Assuming API response has a 'humidity' field
+            updateHumidityGauge(humidityValue);
+        })
+        .catch(error => console.error('Error fetching humidity data:', error));
+  }
+  
+  // Call the function initially and set interval to update gauges periodically
+  fetchDataAndUpdateGauges(); // Initial update
+  setInterval(fetchDataAndUpdateGauges, 5000); // Update every 5 seconds (adjust as needed)
+  
