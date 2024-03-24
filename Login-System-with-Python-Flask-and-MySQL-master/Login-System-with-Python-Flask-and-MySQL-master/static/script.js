@@ -5,20 +5,89 @@ const apiUrlCommon = `https://blynk.cloud/external/api/get?token=${token}&`;
 var dataValue;
 console.log("inside the js")
 
+let numbersOfSwitchArray = [1,2,3,5,8];
+let numbersOfTempArray = [9,10];
 
 function loadPage() {
-    for(let i= 1; i<= 10; i++) {
-        fetchData(i);
-    }
+  for (let number of numbersOfSwitchArray) {
+      fetchData(number);
+  }
+
+  for (let number of numbersOfTempArray) {
+    fetchTempData(number);
+  }
+}
+
+function fetchTempData(value) {
+  console.log(value + " value of the value")
+  let switchId = "v"+value;
+  const url = apiUrlCommon + "v" + value
+  console.log(url + " url..............");
+  fetch(url)
+      .then(response => {
+  // Check if the response is successful
+  console.log(response + " response,.........")
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  // Parse the JSON response
+  return response.json();
+})
+.then(data => {
+  // Extract the value from the response
+  const variableValue = data; // Assuming the response is the value itself
+  console.log('Variable value: in temp', variableValue);
+
+  if(value == 9) {
+    updateTemperatureGauge(variableValue); // Update temperature gauge
+  } else{
+    updateHumidityGauge(variableValue);
+  }
+})
+.catch(error => {
+  console.error('Error:', error);
+});
+}
+
+// Function to update temperature gauge
+function updateTemperatureGauge(temperatureValue) {
+  const temperatureLabel = document.getElementById('v9'); // Get temperature label element
+  temperatureLabel.textContent = temperatureValue + ' °C'; // Update temperature value
+  
+  const gauge = document.querySelector('.gauge.temperature');
+  const needle = gauge.querySelector('.needle.temperature');
+  
+  // Calculate the angle of rotation based on temperature value (assuming temperature range is 0-100)
+  const angle = (temperatureValue / 100) * 180 - 90;
+  
+  // Apply the rotation to the needle
+  needle.style.transform = `translateX(-50%) rotate(${angle}deg)`;
+}
+
+// Function to update humidity gauge
+function updateHumidityGauge(humidityValue) {
+  const humidityLabel = document.getElementById('v10'); // Get humidity label element
+  humidityLabel.textContent = humidityValue + ' %'; // Update humidity value
+  
+  const gauge = document.querySelector('.gauge.humidity');
+  const needle = gauge.querySelector('.needle.humidity');
+  
+  // Calculate the angle of rotation based on humidity value (assuming humidity range is 0-100)
+  const angle = (humidityValue / 50) * 180 - 90;
+  
+  // Apply the rotation to the needle
+  needle.style.transform = `translateX(-50%) rotate(${angle}deg)`;
 }
 
 function fetchData(value) {
     console.log(value + " value of the value")
     let switchId = "v"+value;
     const url = apiUrlCommon + "v" + value
+    console.log(url + " url..............");
     fetch(url)
         .then(response => {
     // Check if the response is successful
+    console.log(response + " response,.........")
     if (!response.ok) {
       throw new Error('Failed to fetch data');
     }
@@ -29,8 +98,6 @@ function fetchData(value) {
     // Extract the value from the response
     const variableValue = data; // Assuming the response is the value itself
     console.log('Variable value:', variableValue);
-    // dataValue = variableValue;
-    // console.log(dataValue + " data value,..............................")
 
     console.log(switchId + " switchId of the switch")
     const toggleButton = document.getElementById(switchId);
@@ -38,7 +105,6 @@ function fetchData(value) {
 
     toggleButton.checked = (variableValue === 1); // Check if value is 1
 
-    // You can do whatever you need with the variable value here
   })
   .catch(error => {
     console.error('Error:', error);
@@ -72,55 +138,8 @@ function fetchData(value) {
     document.getElementById(switchId).addEventListener('change', updateData(checkbox, switchId));
   }
 // Add more time in seconds
+// setInterval(loadPage, 1000);
+
+// Call loadPage initially and set interval to update periodically
+loadPage();
 setInterval(loadPage, 1000);
-  // Function to update temperature gauge
-  function updateTemperatureGauge(temperatureValue) {
-    const gauge = document.querySelector('.gauge.temperature');
-    const needle = gauge.querySelector('.needle.temperature');
-    const label = gauge.querySelector('.label.temperature');
-    
-    const angle = (temperatureValue / 100) * 180 - 90; // Assuming temperature range is 0-100
-    needle.style.transform = `translateX(-50%) rotate(${angle}deg)`;
-    label.textContent = `${temperatureValue.toFixed(2)} °C`; // Display temperature with 2 decimal places
-  }
-  
-  // Function to update humidity gauge
-  function updateHumidityGauge(humidityValue) {
-    const gauge = document.querySelector('.gauge.humidity');
-    const needle = gauge.querySelector('.needle.humidity');
-    const label = gauge.querySelector('.label.humidity');
-    
-    const angle = (humidityValue / 100) * 180 - 90; // Assuming humidity range is 0-100
-    needle.style.transform = `translateX(-50%) rotate(${angle}deg)`;
-    label.textContent = `${humidityValue.toFixed(2)} %`; // Display humidity with 2 decimal places
-  }
-  
-  // Function to fetch data from API and update gauges
-  function fetchDataAndUpdateGauges() {
-    // Replace 'apiUrlTemperature' and 'apiUrlHumidity' with the actual API endpoints
-    const apiUrlTemperature = 'your_temperature_api_endpoint';
-    const apiUrlHumidity = 'your_humidity_api_endpoint';
-  
-    // Fetch temperature data
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            const temperatureValue = data.temperature; // Assuming API response has a 'temperature' field
-            updateTemperatureGauge(temperatureValue);
-        })
-        .catch(error => console.error('Error fetching temperature data:', error));
-  
-    // Fetch humidity data
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            const humidityValue = data.humidity; // Assuming API response has a 'humidity' field
-            updateHumidityGauge(humidityValue);
-        })
-        .catch(error => console.error('Error fetching humidity data:', error));
-  }
-  
-  // Call the function initially and set interval to update gauges periodically
-  fetchDataAndUpdateGauges(); // Initial update
-  setInterval(fetchDataAndUpdateGauges, 5000); // Update every 5 seconds (adjust as needed)
-  

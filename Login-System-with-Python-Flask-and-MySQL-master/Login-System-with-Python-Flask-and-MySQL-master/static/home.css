@@ -82,19 +82,15 @@ input:checked + .slider:before {
 
 .switch-grid {
     display: flex;
-
     flex-wrap: wrap; 
-    /* max-width: 50%; Limit grid width to at most half of the page */
-    /* margin-left: 25%; Space on the left side of the grid */
-    /* background-color: grey; */
+    justify-content: center; /* Horizontally center the grid */
+    align-items: center; /* Vertically center the grid */
 }
 
 .switch-row {
     display: flex;
     flex-wrap: wrap;
     flex-basis: 75%;
-     /* Allow wrapping of switch containers */
-    /* width: 100%; /* Ensure switches span the full width of the grid */
     justify-content: center;
 }
 @media (max-width: 600px) {
@@ -106,6 +102,11 @@ input:checked + .slider:before {
     button {
         width: 100%;
     }
+}
+.grid {
+    display: flex;
+    justify-content: center; /* Horizontally center the grid */
+    align-items: center; /* Vertically center the grid */
 }
 .gauge {
     position: relative;
@@ -119,7 +120,7 @@ input:checked + .slider:before {
     left: 50%;
     width: 2px;
     height: 40%;
-    background-color: red;
+    /* background-color: red; */
     transform-origin: bottom center;
     transform: translateX(-50%) rotate(0deg);
     transition: transform 0.5s ease;
@@ -161,4 +162,32 @@ input:checked + .slider:before {
 
 .label .value {
     font-weight: bold;
+}
+
+
+.dial::before {
+    content: "0"; /* Start value */
+    position: absolute;
+    bottom: -5px; /* Adjust the position of the labels */
+    left: -5px; /* Adjust the position of the labels */
+    font-size: 12px; /* Adjust the font size of the labels */
+    color: #333; /* Adjust the color of the labels */
+}
+
+.dial::after {
+    content: "100"; /* End value for temperature */
+    position: absolute;
+    bottom: -5px; /* Adjust the position of the labels */
+    right: -5px; /* Adjust the position of the labels */
+    font-size: 12px; /* Adjust the font size of the labels */
+    color: #333; /* Adjust the color of the labels */
+}
+
+.humidity .dial::after {
+    content: "50"; /* End value for humidity */
+    position: absolute;
+    bottom: -5px; /* Adjust the position of the labels */
+    right: -5px; /* Adjust the position of the labels */
+    font-size: 12px; /* Adjust the font size of the labels */
+    color: #333; /* Adjust the color of the labels */
 }
