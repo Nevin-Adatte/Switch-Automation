@@ -72,8 +72,9 @@ function fetchData(value) {
   function updateAPI(checkbox, switchId) {
     document.getElementById(switchId).addEventListener('change', updateData(checkbox, switchId));
   }
-  // Function to update temperature gauge
-function updateTemperatureGauge(temperatureValue) {
+
+ // Function to update temperature gauge
+ function updateTemperatureGauge(temperatureValue) {
   const gauge = document.querySelector('.gauge.temperature');
   const needle = gauge.querySelector('.needle.temperature');
   const label = gauge.querySelector('.label.temperature');

@@ -57,8 +57,8 @@ function updateTemperatureGauge(temperatureValue) {
   const gauge = document.querySelector('.gauge.temperature');
   const needle = gauge.querySelector('.needle.temperature');
   
-  // Calculate the angle of rotation based on temperature value (assuming temperature range is 0-100)
-  const angle = (temperatureValue / 100) * 180 - 90;
+  // Calculate the angle of rotation based on temperature value (assuming temperature range is 1-100)
+  const angle = ((temperatureValue - 1) / 99) * 180 - 90;
   
   // Apply the rotation to the needle
   needle.style.transform = `translateX(-50%) rotate(${angle}deg)`;
@@ -72,12 +72,13 @@ function updateHumidityGauge(humidityValue) {
   const gauge = document.querySelector('.gauge.humidity');
   const needle = gauge.querySelector('.needle.humidity');
   
-  // Calculate the angle of rotation based on humidity value (assuming humidity range is 0-100)
-  const angle = (humidityValue / 50) * 180 - 90;
+  // Calculate the angle of rotation based on humidity value (assuming humidity range is 1-50)
+  const angle = ((humidityValue - 1) / 49) * 180 - 90;
   
   // Apply the rotation to the needle
   needle.style.transform = `translateX(-50%) rotate(${angle}deg)`;
 }
+
 
 function fetchData(value) {
     console.log(value + " value of the value")
