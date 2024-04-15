@@ -5,7 +5,7 @@ const apiUrlCommon = `https://blynk.cloud/external/api/get?token=${token}&`;
 var dataValue;
 console.log("inside the js")
 
-let numbersOfSwitchArray = [1,2,3,5,8];
+let numbersOfSwitchArray = [1,2,3,4,5];
 let numbersOfTempArray = [9,10];
 
 function loadPage() {
